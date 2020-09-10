@@ -12,7 +12,7 @@ Install-Module Az -Scope AllUsers -Acceptlicense -Force
 
 ## Install bicep CLI
 if ($IsLinux) {
-  curl -Lo bicep https://bicepdemo.z22.web.core.windows.net/latest/bicep-linux-x64
+  curl -Lo bicep https://github.com/Azure/bicep/releases/latest/download/bicep-linux-x64
   Move-Item -Path bicep -Destination /usr/local/bin/bicep -Force
   chmod +x /usr/local/bin/bicep
   bicep --help
@@ -22,7 +22,7 @@ if ($IsWindows) {
   $installPath = "$env:USERPROFILE\.bicep"
   $installDir = New-Item -ItemType Directory -Path $installPath -Force
   $installDir.Attributes += 'Hidden'
-  (New-Object Net.WebClient).DownloadFile("https://bicepdemo.z22.web.core.windows.net/latest/bicep-win-x64.exe", "$installPath\bicep.exe")
+  (New-Object Net.WebClient).DownloadFile("https://github.com/Azure/bicep/releases/latest/download/bicep-win-x64.exe", "$installPath\bicep.exe")
   $currentPath = (Get-Item -path "HKCU:\Environment" ).GetValue('Path', '', 'DoNotExpandEnvironmentNames')
   if (-not $currentPath.Contains("%USERPROFILE%\.bicep")) { setx PATH ($currentPath + ";%USERPROFILE%\.bicep") }
   if (-not $env:path.Contains($installPath)) { $env:path += ";$installPath" }
